@@ -1,0 +1,12 @@
+FROM ubuntu:latest
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt update 
+RUN apt install wget unzip apache2
+RUN wget https://www.tooplate.com/zip-templates/2162_stackcraft.zip
+RUN unzip 2162_stackcraft.zip
+RUN cp -r 2162_stackcraft.zip/* /var/www/html/
+EXPOSE 80
+CMD ["apache2ctl", "-D", "FOREGROUND"] 
+
