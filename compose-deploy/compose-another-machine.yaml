@@ -1,0 +1,54 @@
+services:
+  frontend:
+    image: akhileshguttula/frontend:latest
+    container_name: my-frontend
+    ports:
+      - "8080:80"
+    environment:
+      DB_HOST: database
+      DB_PORT: 3306
+      DB_NAME: mydatabase
+      DB_USER: myapp
+      DB_PASSWORD: db@123
+    depends_on:
+      - database
+    networks:
+      - app-network
+
+  database:
+    image: akhileshguttula/database:latest
+    container_name: my-database
+    environment:
+      MYSQL_ROOT_PASSWORD: root@123
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: myapp
+      MYSQL_PASSWORD: db@123
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Then on another machine:
+
+#sudo docker login
+#sudo docker compose pull
+#sudo docker compose up -d    
