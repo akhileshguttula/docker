@@ -1,5 +1,5 @@
 -- Use the database created by the MySQL container.
-USE nkslab;
+USE mydatabase;
 
 -- Create the application users table.
 CREATE TABLE IF NOT EXISTS users (

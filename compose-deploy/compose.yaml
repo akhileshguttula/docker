@@ -1,0 +1,82 @@
+services:
+
+  # ============================================================
+  # Frontend service
+  # ============================================================
+  frontend:
+
+    # Build the frontend image using frontend/Dockerfile.
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+
+    # Give the running container an easy classroom-friendly name.
+    container_name: my-frontend
+
+    # Map host port 8080 to Apache port 80 inside the container.
+    ports:
+      - "8080:80"
+
+    # Pass database connection information to PHP.
+    # Notice DB_HOST uses the Compose service name: database.
+    environment:
+      DB_HOST: database
+      DB_PORT: 3306
+      DB_NAME: mydatabase
+      DB_USER: myapp
+      DB_PASSWORD: db@123
+
+    # Start the database container before starting the frontend.
+    depends_on:
+      - database
+
+    # Connect frontend to the application network.
+    networks:
+      - app-network
+
+
+  # ============================================================
+  # Database service
+  # ============================================================
+  database:
+
+    # Build our MySQL image containing init.sql.
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+
+    container_name: my-database
+
+    # Environment variables used by the official MySQL entrypoint.
+    environment:
+      MYSQL_ROOT_PASSWORD: root@123
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: myapp
+      MYSQL_PASSWORD: db@123
+
+    # Persist MySQL data even if the container is recreated.
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+    # Connect database to the same application network.
+    networks:
+      - app-network
+
+
+# ============================================================
+# Docker network
+# ============================================================
+networks:
+
+  # Compose automatically creates this bridge network.
+  app-network:
+    driver: bridge
+
+
+# ============================================================
+# Persistent volume
+# ============================================================
+volumes:
+
+  # MySQL data is stored outside the writable container layer.
+  mysql-data:
