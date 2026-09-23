@@ -3,7 +3,7 @@ name: Docker Build And Push
 on:
   push:
     branches:
-    - docker/docker_practise
+     - docker_practise
 
 env:
   IMAGE_NAME: studio
