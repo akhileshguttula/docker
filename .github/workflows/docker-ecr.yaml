@@ -1,0 +1,47 @@
+name: Docker Build and Push to AWS ECR
+
+on:
+  push:
+    branches:
+      - docker_practise
+
+env:
+  AWS_REGION: us-east-1
+  ECR_REGISTRY: 602367507906.dkr.ecr.us-east-1.amazonaws.com     #ECR registry link without repository
+  ECR_REPOSITORY: akhileshguttula   #repository name we created in ECR
+
+jobs:
+  build-and-push:
+    name: Build and Push Docker Image to AWS ECR
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # Step 1: Download source code from GitHub
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Step 2: Authenticate GitHub Actions with AWS
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # Step 3: Login Docker to Amazon ECR
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      # Step 4: Build Docker image
+      - name: Build Docker Image
+        run: |
+          docker build \
+            -t $ECR_REGISTRY/$ECR_REPOSITORY:latest \
+            .
+
+      # Step 5: Push Docker image to ECR
+      - name: Push Docker Image
+        run: |
+          docker push \
+            $ECR_REGISTRY/$ECR_REPOSITORY:latest
