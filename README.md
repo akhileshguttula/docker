@@ -7,14 +7,21 @@ added another file which is modified from chatgpt having non-interactive screen
  
  ls
     docker build
+    
     sudo docker build
+    
     sudo docker build .
-    docker ps -a
+    
     sudo docker ps -a
+    
     sudo docker images
-    sudo docker build -t webiste:latest .
+    
+    sudo docker build -t webiste:latest 
+    .
     sudo docker images
+    
     sudo docker run -itd -p 8080:80 d0d90c329a74
+    
     sudo docker ps -a
     sudo docker stop 56efd32dad96
     sudo docker rm 56efd32dad96
