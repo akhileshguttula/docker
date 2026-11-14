@@ -28,4 +28,4 @@ added another file which is modified from chatgpt having non-interactive screen
     
     sudo docker ps -a
     
-    history
+    history  "to view the history of the command used"
