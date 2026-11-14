@@ -6,29 +6,23 @@ docker repository
 added another file which is modified from chatgpt having non-interactive screen
  
 
-    docker build
+ 
     
-    sudo docker build
+    sudo docker build . "this is used to create image from docker file "
     
-    sudo docker build .
+    sudo docker ps -a  "to list all the containers"
     
-    sudo docker ps -a
+    sudo docker images  "to list all the images"
     
-    sudo docker images
-    
-    sudo docker build -t webiste:latest 
-    .
-    sudo docker images
-    
-    sudo docker run -itd -p 8080:80 d0d90c329a74
+    sudo docker run -itd -p 8080:80 d0d90c329a74  "to build the container and port forwarding"
     
     sudo docker ps -a
     
-    sudo docker stop 56efd32dad96
+    sudo docker stop 56efd32dad96  "to stop the container"
     
-    sudo docker rm 56efd32dad96
+    sudo docker rm 56efd32dad96  "to remove the container"
     
-    sudo docker rmi webiste:latest
+    sudo docker rmi webiste:latest  "to remove image"
     
     sudo docker  images
     
