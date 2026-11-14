@@ -5,7 +5,7 @@ docker repository
 
 added another file which is modified from chatgpt having non-interactive screen
  
- ls
+
     docker build
     
     sudo docker build
@@ -23,9 +23,15 @@ added another file which is modified from chatgpt having non-interactive screen
     sudo docker run -itd -p 8080:80 d0d90c329a74
     
     sudo docker ps -a
+    
     sudo docker stop 56efd32dad96
+    
     sudo docker rm 56efd32dad96
+    
     sudo docker rmi webiste:latest
+    
     sudo docker  images
+    
     sudo docker ps -a
+    
     history
